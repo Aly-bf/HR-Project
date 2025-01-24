@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Abst(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -20,7 +21,7 @@ class personel(Abst):
         (MASTER, 'Master'),
         (PHD, 'Phd'),
     ]
-
+    user = models.ForeignKey(User, models.CASCADE)
     name = models.CharField(max_length=50)
     birthdate = models.DateField()
     fathername = models.CharField(max_length=50)
