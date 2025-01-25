@@ -1,13 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_save
 
 class Abst(models.Model):
     id = models.BigAutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
-
+    
     class Meta:
         abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            last_object = self.__class__.objects.order_by('-id').first()
+            if last_object:
+                self.id = last_object.id + 1
+            else:
+                self.id = 100000
+        super(Abst, self).save(*args, **kwargs)
+
 
 
 class personel(Abst):
