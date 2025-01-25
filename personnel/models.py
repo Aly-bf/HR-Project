@@ -29,3 +29,6 @@ class personel(Abst):
     martial_status = models.BooleanField(default=False)
     degree = models.CharField(choices=DEGREE_CHOICES, max_length=50)
     employment_data = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name} / {self.employment_data}'
