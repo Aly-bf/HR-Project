@@ -28,6 +28,8 @@ urlpatterns = [
     path('login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', include('personnel.urls')),
+    path('', include('salary.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
